@@ -23,11 +23,6 @@ TOWNS = [
     ]
 
 
-@bot.message_handler(commands=['help'])
-def send_help_info(message):
-    bot.send_message(message.chat.id, 'Выберите из предложенных городов, нужный вам город')
-
-
 @bot.message_handler(commands=['start'])
 def start_bot(message):
     markup = ReplyKeyboardMarkup(
@@ -40,9 +35,14 @@ def start_bot(message):
     bot.send_message(message.chat.id, 'Выберите город:', reply_markup=markup)
 
 
+@bot.message_handler(commands=['help'])
+def send_help_info(message):
+    bot.send_message(message.chat.id, 'Выберите из предложенных городов, нужный вам город')
+
+
 @bot.message_handler()
 def reply(message):
-    bot.send_message(message.chat.id, 'Вы выбрали ', message.text)
+    bot.send_message(message.chat.id, f'Вы выбрали {message.text}')
 
 
 if __name__ == '__main__':
