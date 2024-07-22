@@ -47,6 +47,7 @@ body {
 
 .town_card:hover {
     transform: scale(1.05);
+    filter: brightness(85%);
 }
 .title {
     font-size: 64px;
