@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url("normalize.css");
+
+/* html {
+    font-size: 18px;
+} */
+
+body {
+    font-family: "Play", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.description {
+    font-size: 25px;
+    position: absolute;
+    font-weight: normal;
+    left: 120px;
+    top: 390px;
+}
+
+.button {
+    position: absolute;
+    color: white;
+    background-color: #F96A3D;
+    padding: 26px 55px;
+    border-radius: 38px;
+    font-weight: bold;
+    font-size: 20px;
+    left: 123px;
+    top: 489px;
+    transition: all 0.5s ease;
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+.town_card {
+    transition: all 0.5s ease;
+}
+
+.town_card:hover {
+    transform: scale(1.05);
+}
+.title {
+    font-size: 64px;
+    text-align: left;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    line-height: normal;
+    position: absolute;
+    left: 120px;
+    top: 120px;
+}
+
+
+.title_gid {
+    position: relative;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+
+.header {
+    background-image: url('../images/aa.png');
+    position: relative;
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-size: larger;
+    font-size: 25px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    top: 160px;
+    right: 300px;
+    position: absolute;
+    width: 405px;
+
+}
+
+
+.gids {
+    position: absolute;
+    top: 686px;
+    left: 842px;
+
+}
+
+.nav_gid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    top: 45px;
+    gap: 59px;
+}
+
+.towns {
+    position: relative;
+}
+
+.text_images {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.arrow {
+    position: absolute;
+    right: 16px;
+    bottom: 35px;
+}
