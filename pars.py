@@ -4,6 +4,7 @@ from pathlib import Path
 from os.path import join
 
 from bs4 import BeautifulSoup
+from pathvalidate import sanitize_filename
 import requests
 
 
@@ -23,7 +24,10 @@ def parse_excursions(response, city):
         payment = card.find(class_='price-actual').text.strip()
         quantity = card.find(class_='price-for').text.strip()
         img_url = card.find('img', class_='exp-pic lazy-image')['src']
-        img_path = download_image(img_url, '.jpeg', f'excursions_images/{city}')
+        img_name = card.find('img', class_='exp-pic lazy-image')['alt']
+        img_name = sanitize_filename(img_name.split('"')[1])
+        print(img_name)
+        img_path = download_image(img_url, f'{img_name}.jpeg', f'excursions_images/{city}')
         if duration:
             time = duration.text.strip()
         else:
