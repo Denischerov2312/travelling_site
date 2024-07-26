@@ -1,41 +1,113 @@
 from bs4 import BeautifulSoup
 import requests
 import json
+import os
+from pathlib import Path
+from os.path import join
+import random
 
 
-url = "https://www.sputnik8.com/ru/nizhnynovgorod?filters[category][slug]=top10&filters[sort]=reviews_count"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
+def find_city_name(soup):
+    name = soup.select_one("nav[class=location-crumbs]").find_all("span")[3].text
+    print(name)
+    return name
+
+def parse_excursions(response, city):
+    soup = BeautifulSoup(response.text, "html.parser")
+    cards = soup.find_all(class_='exp-list-item-wrapper exp-snippet')
+    city_name = find_city_name(soup)
+
+    excursions=[]
+
+    for card in cards:
+        title_text = card.find(class_='title').text.strip()
+        description = card.find(class_='tagline').text.strip()
+        duration = card.find(class_='duration')
+        movement = card.find(class_='movement').text.strip()
+        datetime = card.find(class_='dates')
+        payment = card.find(class_='price-actual').text.strip()
+        quantity = card.find(class_='price-for').text.strip()
+        img_url = card.find('img', class_='exp-pic lazy-image')['src']
+        img_path = download_image(img_url, f'{random.randint(1000000, 1000000000)}.jpeg', f'excursions_images/{city}')
+        if duration:
+            time = duration.text.strip()
+        else:
+            time = 'Время экскурсии будет объявлено позднее'
+
+        if datetime:
+            date = datetime.text.strip()
+        else:
+            date = 'Ежедневно'
+
+        excursions.append({
+            'city_name': city_name,
+            'title_text': title_text,
+            'description': description,
+            'duration': time,
+            'movement': movement,
+            'datetime': date,
+            'payment': payment,
+            'quantity': quantity,
+            'image_url': img_url,
+            'img_path': img_path
+        })
+    return excursions
+    
+def download_image(url, filename, folder):
+    try:
+        image_response = requests.get(url)
+        image_response.raise_for_status()
+        os.makedirs(folder, exist_ok=True)
+        filepath = join(folder, filename)
+        with open(filepath, 'wb') as file:
+            file.write(image_response.content)
+        return filepath
+    except requests.exceptions.HTTPError:
+        return None
 
 
+Path('cities').mkdir(parents=True, exist_ok=True)
+cities = [
+'Arkhangelsk',
+'Astrakhan',
+'Vladivostok',
+'Volgograd',
+'Vladimir',
+'Voronezh',
+'Kazan',
+'Kaliningrad',
+'Moscow',
+'Nizhny_Novgorod',
+'Rostov-on-Don',
+'Saint_Petersburg',
+'Sochi',
+'Tobolsk'
+]
 
-cards = soup.find_all(class_='activity-card_n0wr gtm-activity-card activity-card_new_xjRx')
+for city in cities:
+    url = f'https://experience.tripster.ru/experience/{city}'
 
-excursions=[]
+    all_activities = []
 
-for card in cards:
-    title_text = card.find(class_='heading_0NyQ heading_tag_div heading_size_h4_HrI1 heading_color_black heading_weight_bold_Ed7c title_xIA3').text.strip()
-    description = card.find(class_='text-string_8e2Q text-string_size_s_lvye text-string_color_grey_vowO description_phiK').text.strip()
-    type_excursion = card.find(class_='wrap_Pp7D wrap_margin_none_rTLS details_ZBWU').text.strip()
-    datetime = card.find(class_='events_UOUT')
-    payment = card.find(class_='value_uU6k').text.strip()
-    quantity = card.find(class_='text-string_8e2Q text-string_size_xs_sqUc price-type_v+Gt').text.strip()
-    if datetime is not None:
-        time = datetime.text.strip()
+    city_response = requests.get(url)
+    city_response.raise_for_status()
+    city_soup = BeautifulSoup(city_response.text, "html.parser")
+
+    pagination = city_soup.find(class_='pagination')
+    if pagination:
+        page_count = pagination.find_all('a')
+        page_count = int(page_count[-1].text)
+
+        for page_num in range(1, page_count+1):
+            payload = {'page': page_num}
+            page_response = requests.get(url, params=payload)
+            page_response.raise_for_status()
+            all_activities.append(parse_excursions(page_response, city))
     else:
-        time = None
+        all_activities.append(parse_excursions(city_response, city))
 
-    excursions.append({
-        #'image_url': 'Scott',
-        'name': title_text,
-        'description': description,
-        'type_excursion': type_excursion,
-        'datetime': time,
-        'payment': payment,
-        'quantity': quantity
-    })
-    print(title_text, description, type_excursion, time, payment, quantity)
+    with open(f'cities/{city}.json', 'w', encoding='utf8') as outfile:
+        json.dump(all_activities, outfile, ensure_ascii=False,)
 
-
-# with open('data.json', 'w', encoding='utf8') as outfile:
-#     json.dump(excursions, outfile, ensure_ascii=False,)
+# if __name__ == '__main__':
+#     parse_excursions()
