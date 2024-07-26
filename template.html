@@ -9,51 +9,359 @@
 
 <body>
   <header class="header">
-    <nav class="nav">
+    <nav class="header__nav">
         <a href="#">Помощь</a>
         <a href="#">Контакты</a>
         <a href="#">Отзывы</a>
     </nav>
 
-
-    <h1 class="title">Открой для себя <br>новый взгляд</h1>
-    <p class="description">Сайт для путешествий и погоды</p>
-    <a class="button" href="#">Узнать больше</a>
+    <h1 class="header__title">Открой для себя <br>новый взгляд</h1>
+    <div class="header__description">Сайт для путешествий и погоды</div>
+    <a class="header__button" href="#">Узнать больше</a>
     
-    <div class="gids">
-      <p class="title_gid">Популярные экскурсии</p>
-      <div class="nav_gid">
-
-        <a class="town_card" href="#">
-          <div class="towns">
-            <img src="assets/images/дивеевоарзм.png">
-            <div class="text_images">Дивеево и Арзамас</div>
-            <img class='arrow' src="assets/images/Arrow.png" alt="Стрелка">
-          </div>
+    <div class="header__popular-gids">
+      <div class="popular-gids__title">Популярные экскурсии</div>
+      <div class="popular-gids">
+        <a class="card" href="#">
+          <img src="assets/images/дивеевоарзм.png">
+          <div class="card__name">Дивеево и Арзамас</div>
+          <img class='arrow' src="assets/images/Arrow.png" alt="Стрелка">
         </a>
         
-        <a class="town_card" href="#">
-          <div class="towns">
-            <img src="assets/images/вечернвятрехч.png">
-            <div class="text_images">Вечерняя обзорная трёхчасовая автобусная</div>
-            <img class="arrow" src="assets/images/Arrow.png" alt="Стрелка">
-          </div>
+        <a class="card" href="#">
+
+          <img src="assets/images/вечернвятрехч.png">
+          <div class="card__name">Вечерняя обзорная трёхчасовая автобусная</div>
+          <img class="arrow" src="assets/images/Arrow.png" alt="Стрелка">
+
         </a>
 
-        <a class="town_card" href="#">
-          <div class="towns">
-            <img src="assets/images/болдино.png">
-            <div class="text_images">Большое Болдино</div>
-            <img class="arrow" src="assets/images/Arrow.png" alt="Стрелка">
-          </div>
+        <a class="card" href="#">
+
+          <img src="assets/images/болдино.png">
+          <div class="card__name">Большое Болдино</div>
+          <img class="arrow" src="assets/images/Arrow.png" alt="Стрелка">
+
         </a>
 
       </div>
     </div>
 
-
-    <div></div>
   </header>
+
+  <main class="main">
+    <div class="container">
+
+      <div class="main__menu-row">
+
+        <div class="main__weather">
+          <img src="assets/images/back_weather.png" alt="Картинка погоды">
+          <div class="weather__title weather__element">
+            <img src="assets/images/sun.svg">
+            Погода на сегодня
+          </div>
+          <div class="weather__town weather__element">Нижний Новгород</div>
+          <div class="weather__time weather__element">Сейчас
+            <span>17:52</span>
+            </div>
+          <div class="weather__condition weather__element">
+            <img src="assets/images/cloud.png">
+            Пасмурно
+          </div>
+          <div class="weather__humidity weather__element">
+            <img src="assets/images/влажность.png">
+            81%
+          </div>
+          <div class="weather__wind-speed weather__element">
+            <img src="assets/images/wind.png">
+            1.8 м/c, СЗ
+          </div>
+          <div class="weather__temp weather__element">+21°</div>
+        </div>
+
+        <div class="main__description">
+          <span>Добро пожаловать на наш сайт,</span> посвящённый путешествиям и погоде! 
+          Здесь вы найдёте всё необходимое для планирования идеального путешествия, 
+          от актуальных погодных условий до подробных гидов по интересным местам.
+        </div>
+
+      </div>
+
+      <div class="city__title">Нижний Новгород</div>
+
+      <div class="main__tours">
+
+        <div class="tour">
+          <img src="assets/images/tour1.png">
+          <div class="tour__title">Восемь веков Нижнего</div>
+          <div class="tour__text">
+            Прекрасная возможность увидеть весь Нижний 
+            Новгород и узнать его историю за 3 часа на прогулке 
+            с членом Нижегородской гильдии экскурсоводов.
+            
+            <span>
+              На автомобиле
+              Индивидуальная
+              18 человек 3 ч.
+            </span>
+            <span>
+              Сб, 20 июл, 08:00
+              Сб, 20 июл, 10:00
+            </span>
+            <span class="tour__title">
+              7 900 ₽
+            </span>
+            <span>
+              за экскурсию
+            </span>
+          </div>
+          
+        </div>
+
+        <div class="tour">
+          <img src="assets/images/tour1.png">
+          <div class="tour__title">Восемь веков Нижнего</div>
+          <div class="tour__text">
+            Прекрасная возможность увидеть весь Нижний 
+            Новгород и узнать его историю за 3 часа на прогулке 
+            с членом Нижегородской гильдии экскурсоводов.
+            
+            <span>
+              На автомобиле
+              Индивидуальная
+              18 человек 3 ч.
+            </span>
+            <span>
+              Сб, 20 июл, 08:00
+              Сб, 20 июл, 10:00
+            </span>
+            <span class="tour__title">
+              7 900 ₽
+            </span>
+            <span>
+              за экскурсию
+            </span>
+          </div>
+          
+        </div>
+
+        <div class="tour">
+          <img src="assets/images/tour1.png">
+          <div class="tour__title">Восемь веков Нижнего</div>
+          <div class="tour__text">
+            Прекрасная возможность увидеть весь Нижний 
+            Новгород и узнать его историю за 3 часа на прогулке 
+            с членом Нижегородской гильдии экскурсоводов.
+            
+            <span>
+              На автомобиле
+              Индивидуальная
+              18 человек 3 ч.
+            </span>
+            <span>
+              Сб, 20 июл, 08:00
+              Сб, 20 июл, 10:00
+            </span>
+            <span class="tour__title">
+              7 900 ₽
+            </span>
+            <span>
+              за экскурсию
+            </span>
+          </div>
+          
+        </div>
+
+        <div class="tour">
+          <img src="assets/images/tour1.png">
+          <div class="tour__title">Восемь веков Нижнего</div>
+          <div class="tour__text">
+            Прекрасная возможность увидеть весь Нижний 
+            Новгород и узнать его историю за 3 часа на прогулке 
+            с членом Нижегородской гильдии экскурсоводов.
+            
+            <span>
+              На автомобиле
+              Индивидуальная
+              18 человек 3 ч.
+            </span>
+            <span>
+              Сб, 20 июл, 08:00
+              Сб, 20 июл, 10:00
+            </span>
+            <span class="tour__title">
+              7 900 ₽
+            </span>
+            <span>
+              за экскурсию
+            </span>
+          </div>
+          
+        </div>
+
+        <div class="tour">
+          <img src="assets/images/tour1.png">
+          <div class="tour__title">Восемь веков Нижнего</div>
+          <div class="tour__text">
+            Прекрасная возможность увидеть весь Нижний 
+            Новгород и узнать его историю за 3 часа на прогулке 
+            с членом Нижегородской гильдии экскурсоводов.
+            
+            <span>
+              На автомобиле
+              Индивидуальная
+              18 человек 3 ч.
+            </span>
+            <span>
+              Сб, 20 июл, 08:00
+              Сб, 20 июл, 10:00
+            </span>
+            <span class="tour__title">
+              7 900 ₽
+            </span>
+            <span>
+              за экскурсию
+            </span>
+          </div>
+          
+        </div>
+
+        <div class="tour">
+          <img src="assets/images/tour1.png">
+          <div class="tour__title">Восемь веков Нижнего</div>
+          <div class="tour__text">
+            Прекрасная возможность увидеть весь Нижний 
+            Новгород и узнать его историю за 3 часа на прогулке 
+            с членом Нижегородской гильдии экскурсоводов.
+            
+            <span>
+              На автомобиле
+              Индивидуальная
+              18 человек 3 ч.
+            </span>
+            <span>
+              Сб, 20 июл, 08:00
+              Сб, 20 июл, 10:00
+            </span>
+            <span class="tour__title">
+              7 900 ₽
+            </span>
+            <span>
+              за экскурсию
+            </span>
+          </div>
+          
+        </div>
+
+        <div class="tour">
+          <img src="assets/images/tour1.png">
+          <div class="tour__title">Восемь веков Нижнего</div>
+          <div class="tour__text">
+            Прекрасная возможность увидеть весь Нижний 
+            Новгород и узнать его историю за 3 часа на прогулке 
+            с членом Нижегородской гильдии экскурсоводов.
+          </div>
+
+          <div class="tour__metods-movements">
+            <div class="transport">
+              На автомобиле
+            </div>
+            <div class="tour__type">
+              Индивидуальная
+            </div>
+            <div class="tour__count-people">
+              18 человек
+            </div>
+            <div class="tour__time">
+              до 3ч
+            </div>
+          </div>
+          </div>
+          
+        </div>
+
+        <div class="tour">
+          <img src="assets/images/tour1.png">
+          <div class="tour__title">Восемь веков Нижнего</div>
+          <div class="tour__text">
+            Прекрасная возможность увидеть весь Нижний 
+            Новгород и узнать его историю за 3 часа на прогулке 
+            с членом Нижегородской гильдии экскурсоводов.
+            
+            <span>
+              На автомобиле
+              Индивидуальная
+              18 человек 3 ч.
+            </span>
+            <span>
+              Сб, 20 июл, 08:00
+              Сб, 20 июл, 10:00
+            </span>
+            <span class="tour__title">
+              7 900 ₽
+            </span>
+            <span>
+              за экскурсию
+            </span>
+          </div>
+          
+        </div>
+      </div>
+      
+      <button type="button">Показать ещё</button>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer__wrapper">
+      <div class="container">
+        <div class="mailing__row">
+          <div class="mailing__title">Подпишитесь на наши новости</div>
+          <input type="email" placeholder="Адрес электронной почти" class="mailing__input-form">
+          <button type="submit" class="mailing__button">Подписаться</button>
+        </div>
+        <div class="contact-information__row">
+          <div class="contact__card">
+
+            <div class="contact__title contact__element">
+              Контакты
+            </div>
+            <div class="contact__mail contact__element">
+              <img src="assets/images/gmail_icon.png" alt="Лого почты">
+              excursion@gmail.com
+            </div>
+            <div class="contact__tg contact__element">
+              <img src="assets/images/tg_icon.png" alt="Лого телеграмма">
+              @Travelt123_bot
+            </div>
+            <div class="contact__github contact__element">
+              <img src="assets/images/git_icon.png" alt="Лого github">
+              github.com/Denischerov2312/travelling_site
+            </div>
+          </div>
+          <div class="contact__card">
+            <div class="school__title">
+              <img src="assets/images/3st_place_icon.png" alt="Лого школы">
+              <span>Третье место</span>
+            </div>
+            <div class="school_text">
+              Данный проект реализован для школы “Третье место” в обучающих целях 
+            </div>
+          </div>
+          <div class="contact__card">
+            <div class="site__title">
+              <img src="assets/images/sourse_site_icon.png" alt="Логотип сайта-источника">
+            </div>
+            <div class="site__text">
+              Вся информация об экскурсиях и ценах взята с сайта 
+              <a href="https://experience.tripster.ru">experience.tripster.ru</a>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </footer>
 </body>
 
 </html>
