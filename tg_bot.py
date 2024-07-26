@@ -2,6 +2,9 @@ import telebot
 from more_itertools import chunked
 from telebot.types import KeyboardButton
 from telebot.types import ReplyKeyboardMarkup
+from os.path import join
+
+from weather import get_weather
 
 
 bot = telebot.TeleBot('7301427607:AAH2VYUSuxDRwa6a2c9tn7IecwcKukeCKMk')
@@ -21,6 +24,7 @@ TOWNS = [
     'Сочи',
     'Тобольск'
     ]
+TOWN_IMAGES_FOLDER = 'assets/images/town_images/'
 
 
 @bot.message_handler(commands=['start'])
@@ -35,12 +39,42 @@ def start_bot(message):
 
 @bot.message_handler(commands=['help'])
 def send_help_info(message):
-    bot.send_message(message.chat.id, 'Выберите из предложенных городов, нужный вам город')
+    bot.send_message(
+        message.chat.id,
+        'Выберите из предложенных городов, нужный вам город'
+                     )
+
+
+def lowercase_list(data):
+    data = map(lambda x: x.lower(), data)
+    return (list(data))
+
+
+def render_answer(weather, town):
+    try:
+        answer = f"""*{town}*
+Температура🌡️ {weather['temp']}°, {weather['condition']}
+Влажность💧{weather['humidity']}%
+Скорость ветра💨 {weather['wind_speed']} км/ч, направление: {weather['wind_dir']}
+[Узнайте подробнее про {town}.](http://127.0.0.1:5500)
+        """
+    except Exception:
+        return 'Непрвильно указан город'
+    return answer
 
 
 @bot.message_handler()
 def reply(message):
-    bot.send_message(message.chat.id, f'Вы выбрали {message.text}')
+    if message.text.lower() in lowercase_list(TOWNS):
+        weather = get_weather(message.text)
+        answer = render_answer(weather, message.text)
+        filepath = join(TOWN_IMAGES_FOLDER, f'{message.text}.jpg')
+        with open(filepath, 'rb') as photo:
+            bot.send_photo(message.chat.id,
+                           photo,
+                           caption=answer,
+                           parse_mode='Markdown'
+                           )
 
 
 if __name__ == '__main__':
