@@ -27,10 +27,29 @@ def on_reload():
     )
     template = env.get_template('template.html')
 
-    city_weather = get_file_content('weather/weather.json')
+    towns = {
+        'Архангельск': 'Arkhangelsk',
+        'Астрахань': 'Astrakhan',
+        'Владивосток': 'Vladivostok',
+        'Владимир': 'Volgograd',
+        'Волгоград': 'Vladimir',
+        'Воронеж': 'Voronezh',
+        'Казань': 'Kazan',
+        'Калининград': 'Kaliningrad',
+        'Москва': 'Moscow',
+        'Нижний Новгород': 'Nizhny_Novgorod',
+        'Ростов': 'Rostov-on-Don',
+        'Санкт-Петербург': 'Saint_Petersburg',
+        'Сочи': 'Sochi',
+        'Тобольск': 'Tobolsk'
+    }
 
+    city_weather = get_file_content('weather/weather.json')
     cities = get_files_path('cities')
-    city_index = cities.index(f'cities\\{city_weather['city']}.json')
+    city = city_weather['city']
+    for ru_town, eng_town in towns.items():
+        city = city.replace(ru_town, eng_town)
+    city_index = cities.index(f'cities\\{city}.json')
     city_excursions = get_file_content(cities[city_index])
 
     rendered_page = template.render(
