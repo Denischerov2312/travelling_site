@@ -16,7 +16,11 @@ body {
     box-sizing: border-box;
 }
 
-.description {
+.container {
+    max-width: 1677px;
+    margin: 0px auto;
+}
+.header__description {
     font-size: 25px;
     position: absolute;
     font-weight: normal;
@@ -24,7 +28,7 @@ body {
     top: 390px;
 }
 
-.button {
+.header__button {
     position: absolute;
     color: white;
     background-color: #F96A3D;
@@ -37,19 +41,19 @@ body {
     transition: all 0.5s ease;
 }
 
-.button:hover {
+.header__button:hover {
     transform: scale(1.05);
 }
 
-.town_card {
+.card {
     transition: all 0.5s ease;
 }
 
-.town_card:hover {
+.card:hover {
     transform: scale(1.05);
     filter: brightness(85%);
 }
-.title {
+.header__title {
     font-size: 64px;
     text-align: left;
     font-family: "Playfair Display", serif;
@@ -61,7 +65,7 @@ body {
 }
 
 
-.title_gid {
+.popular-gids__title {
     position: relative;
     font-weight: bold;
     font-size: 40px;
@@ -69,7 +73,7 @@ body {
 
 
 .header {
-    background-image: url('../images/aa.png');
+    background-image: url('../images/background.png');
     position: relative;
     color: white;
     background-repeat: no-repeat;
@@ -79,14 +83,14 @@ body {
     width: 100%;
 }
 
-a {
+
+.header__nav a {
     text-decoration: none;
-    color: inherit;
-    font-size: larger;
+    color: white;
     font-size: 25px;
 }
 
-.nav {
+.header__nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -98,14 +102,15 @@ a {
 }
 
 
-.gids {
+.header__popular-gids {
     position: absolute;
-    top: 686px;
+    /* top: 686px; */
     left: 842px;
+    bottom: 87px;
 
 }
 
-.nav_gid {
+.popular-gids {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -114,15 +119,22 @@ a {
     gap: 59px;
 }
 
-.towns {
+.card {
     position: relative;
 }
 
-.text_images {
+.card__name {
     position: absolute;
     top: 10px;
     left: 10px;
     font-weight: bold;
+    font-size: 25px;
+    color: white;
+}
+
+.card__name a {
+    text-decoration: none;
+    color: white;
     font-size: 25px;
 }
 
@@ -130,4 +142,245 @@ a {
     position: absolute;
     right: 16px;
     bottom: 35px;
+}
+
+.main {
+    width: 100%;
+}
+
+.main__menu-row {
+    display: flex;
+    padding: 60px 0 60px 0;
+    align-items: center;
+}
+
+.main__description {
+    width: 922px;
+    font-size: 30px;
+    padding: 0 0 0 50px;
+    font-family: "Playfair Display", serif;
+}
+
+.main__description span {
+    font-weight: bold;
+
+}
+
+.main__weather {
+    position: relative;
+}
+
+.main__weather img {
+    max-width: 100%;
+}
+
+.weather__element {
+    position: absolute;
+    color: white;
+}
+
+.weather__element img {
+    position: relative;
+    top: 12px;
+}
+
+.weather__title {
+    left: 60px;
+    bottom: 338px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.weather__town {
+    left: 60px;
+    bottom: 300px;
+    font-size: 16px;
+}
+
+.weather__time {
+    left: 61px;
+    bottom: 230px;
+    font-size: 25px;
+}
+
+.weather__time span {
+    display: block;
+}
+
+.weather__condition {
+    left: 65px;
+    bottom: 127px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.weather__humidity {
+    left: 57px;
+    bottom: 83px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.weather__wind-speed{
+    left: 65px;
+    bottom: 46px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.weather__temp {
+    left: 526px;
+    bottom: 30px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.city__title {
+    font-family: "Playfair Display", serif;
+    font-size: 50px;
+    font-weight: 500;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.main__tours {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 59px;
+    margin-bottom: auto;
+}
+
+.main__tours {
+    justify-content: center;
+
+}
+
+.tour {
+    display: flex;
+    flex-direction: column;
+    width: 288px;
+
+}
+
+.tour__title {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.tour__text {
+    font-size: 16px;
+}
+
+.tour__text span {
+    display: block;
+}
+
+
+/* Подвал сайта */
+
+.footer__wrapper {
+    border-top: 1px solid #959595;
+    background: linear-gradient(180deg, #FFFFFF 66.5%, #685D55 256.54%);
+}
+
+.mailing__row {
+    display: flex;
+    padding: 25px 0;
+    justify-content:center; 
+    align-items: center;
+}
+
+.mailing__title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.mailing__input-form {
+    border-radius: 10px;
+    border: 2px solid #999999;
+    width: 527px;
+    height: 50px;
+    font-size: 20px;
+    margin-left: 25px;
+    margin-right: 15px;
+    padding-left: 10px;
+}
+
+.mailing__button {
+    padding: 11px 36px;
+    background-color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.contact-information__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding-bottom: 35px;
+}
+
+.contact__card {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact__element {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.contact__element img {
+    position: relative;
+    top: 11px;
+}
+
+.contact__title {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 65px;
+    margin-bottom: 0px;
+}
+
+/* Школа */
+
+.school__title {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.school__title span {
+    padding-left: 6px;
+} 
+
+.school_text {
+    font-size: 20px;
+    width: 390px;
+    padding-top: 17px;
+    text-align: center;
+}
+
+/* Сайт источника */
+
+.site__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site__text {
+    font-size: 20px;
+    text-align: center;
+    width: 390px;
+    padding-top: 10px;
+}
+
+.site__text a {
+    text-decoration: none;
 }
