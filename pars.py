@@ -1,17 +1,19 @@
-from bs4 import BeautifulSoup
-import requests
-import json
 import os
+import json
 from pathlib import Path
 from os.path import join
-import random
+
+from bs4 import BeautifulSoup
+from pathvalidate import sanitize_filename
+import requests
+
 
 def parse_excursions(response, city):
     soup = BeautifulSoup(response.text, "html.parser")
     cards = soup.find_all(class_='exp-list-item-wrapper exp-snippet')
     city_name = soup.select_one("nav[class=location-crumbs]").find_all("span")[3].text
 
-    excursions=[]
+    excursions = []
 
     for card in cards:
         title_text = card.find(class_='title').text.strip()
@@ -22,12 +24,14 @@ def parse_excursions(response, city):
         payment = card.find(class_='price-actual').text.strip()
         quantity = card.find(class_='price-for').text.strip()
         img_url = card.find('img', class_='exp-pic lazy-image')['src']
-        img_path = download_image(img_url, f'{random.randint(1000000, 1000000000)}.jpeg', f'excursions_images/{city}')
+        img_name = card.find('img', class_='exp-pic lazy-image')['alt']
+        img_name = sanitize_filename(img_name.split('"')[1])
+        print(img_name)
+        img_path = download_image(img_url, f'{img_name}.jpeg', f'excursions_images/{city}')
         if duration:
             time = duration.text.strip()
         else:
             time = 'Время экскурсии будет объявлено позднее'
-
         if datetime:
             date = datetime.text.strip()
         else:
@@ -46,7 +50,8 @@ def parse_excursions(response, city):
             'img_path': img_path
         })
     return excursions
-    
+
+
 def download_image(url, filename, folder):
     try:
         image_response = requests.get(url)
@@ -62,46 +67,48 @@ def download_image(url, filename, folder):
 
 Path('cities').mkdir(parents=True, exist_ok=True)
 cities = [
-'Arkhangelsk',
-'Astrakhan',
-'Vladivostok',
-'Volgograd',
-'Vladimir',
-'Voronezh',
-'Kazan',
-'Kaliningrad',
-'Moscow',
-'Nizhny_Novgorod',
-'Rostov-on-Don',
-'Saint_Petersburg',
-'Sochi',
-'Tobolsk'
+    'Arkhangelsk',
+    'Astrakhan',
+    'Vladivostok',
+    'Volgograd',
+    'Vladimir',
+    'Voronezh',
+    'Kazan',
+    'Kaliningrad',
+    'Moscow',
+    'Nizhny_Novgorod',
+    'Rostov-on-Don',
+    'Saint_Petersburg',
+    'Sochi',
+    'Tobolsk'
 ]
 
-for city in cities:
-    url = f'https://experience.tripster.ru/experience/{city}'
 
-    all_activities = []
+def main():
+    for city in cities:
+        url = f'https://experience.tripster.ru/experience/{city}'
+        all_activities = []
 
-    city_response = requests.get(url)
-    city_response.raise_for_status()
-    city_soup = BeautifulSoup(city_response.text, "html.parser")
+        city_response = requests.get(url)
+        city_response.raise_for_status()
+        city_soup = BeautifulSoup(city_response.text, "html.parser")
 
-    pagination = city_soup.find(class_='pagination')
-    if pagination:
-        page_count = pagination.find_all('a')
-        page_count = int(page_count[-1].text)
+        pagination = city_soup.find(class_='pagination')
+        if pagination:
+            page_count = pagination.find_all('a')
+            page_count = int(page_count[-1].text)
 
-        for page_num in range(1, page_count+1):
-            payload = {'page': page_num}
-            page_response = requests.get(url, params=payload)
-            page_response.raise_for_status()
-            all_activities.append(parse_excursions(page_response, city))
-    else:
-        all_activities.append(parse_excursions(city_response, city))
+            for page_num in range(1, page_count+1):
+                payload = {'page': page_num}
+                page_response = requests.get(url, params=payload)
+                page_response.raise_for_status()
+                all_activities.append(parse_excursions(page_response, city))
+        else:
+            all_activities.append(parse_excursions(city_response, city))
 
-    with open(f'cities/{city}.json', 'w', encoding='utf8') as outfile:
-        json.dump(all_activities, outfile, ensure_ascii=False,)
+        with open(f'cities/{city}.json', 'w', encoding='utf8') as outfile:
+            json.dump(all_activities, outfile, ensure_ascii=False,)
 
-# if __name__ == '__main__':
-#     parse_excursions()
+
+if __name__ == '__main__':
+    main()
