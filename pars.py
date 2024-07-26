@@ -6,16 +6,10 @@ from pathlib import Path
 from os.path import join
 import random
 
-
-def find_city_name(soup):
-    name = soup.select_one("nav[class=location-crumbs]").find_all("span")[3].text
-    print(name)
-    return name
-
 def parse_excursions(response, city):
     soup = BeautifulSoup(response.text, "html.parser")
     cards = soup.find_all(class_='exp-list-item-wrapper exp-snippet')
-    city_name = find_city_name(soup)
+    city_name = soup.select_one("nav[class=location-crumbs]").find_all("span")[3].text
 
     excursions=[]
 
