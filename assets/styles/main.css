@@ -84,6 +84,10 @@ body {
 }
 
 
+.header a {
+    text-decoration: none;
+}
+
 .header__nav a {
     text-decoration: none;
     color: white;
@@ -250,16 +254,18 @@ body {
     margin-bottom: auto;
 }
 
-.main__tours {
+.button__show-more {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    
 
 }
 
 .tour {
-    display: flex;
-    flex-direction: column;
+    display: block;
     width: 288px;
-
+    font-size: 16px;
 }
 
 .tour__title {
@@ -267,13 +273,24 @@ body {
     font-size: 25px;
 }
 
-.tour__text {
-    font-size: 16px;
+.tour__price {
+    font-weight: bold;
+    font-size: 25px;
 }
 
-.tour__text span {
-    display: block;
+.tour__text {
+    margin-top: 23px;
 }
+
+.tour__metods-movements {
+    display: block;
+    margin-top: 16px;
+}
+
+.tour_element {
+    margin-top: 16px;
+}
+
 
 
 /* Подвал сайта */
