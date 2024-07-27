@@ -3,9 +3,13 @@ from more_itertools import chunked
 from telebot.types import KeyboardButton
 from telebot.types import ReplyKeyboardMarkup
 from os.path import join
+from os import getenv
+from dotenv import load_dotenv
 
 from weather import get_weather
 
+
+load_dotenv()
 
 bot = telebot.TeleBot('7301427607:AAH2VYUSuxDRwa6a2c9tn7IecwcKukeCKMk')
 TOWNS = [
@@ -24,7 +28,8 @@ TOWNS = [
     'Сочи',
     'Тобольск'
     ]
-TOWN_IMAGES_FOLDER = 'assets/images/town_images/'
+TOWN_IMAGES_FOLDER = getenv('TOWNS_TG_IMAGES_FOLDER', default='assets/images/town_images/')
+HOST_URL = getenv('HOST_URL', default='http://127.0.0.1:5500')
 
 
 @bot.message_handler(commands=['start'])
@@ -56,7 +61,7 @@ def render_answer(weather, town):
 Температура🌡️ {weather['temp']}°, {weather['condition']}
 Влажность💧{weather['humidity']}%
 Скорость ветра💨 {weather['wind_speed']} км/ч, направление: {weather['wind_dir']}
-[Узнайте подробнее про {town}.](http://127.0.0.1:5500)
+[Узнайте подробнее про {town}.]({HOST_URL})
         """
     except Exception:
         return 'Непрвильно указан город'
@@ -75,6 +80,8 @@ def reply(message):
                            caption=answer,
                            parse_mode='Markdown'
                            )
+    else:
+        bot.send_message(message.chat.id, 'Неправильно указан город')
 
 
 if __name__ == '__main__':
