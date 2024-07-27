@@ -26,7 +26,6 @@ def parse_excursions(response, city):
         img_url = card.find('img', class_='exp-pic lazy-image')['src']
         img_name = card.find('img', class_='exp-pic lazy-image')['alt']
         img_name = sanitize_filename(img_name.split('"')[1])
-        print(img_name)
         img_path = download_image(img_url, f'{img_name}.jpeg', f'excursions_images/{city}')
         if duration:
             time = duration.text.strip()
