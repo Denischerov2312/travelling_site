@@ -127,6 +127,12 @@ body {
     position: relative;
 }
 
+.card__background {
+    width: 280px;
+    height: 168.5px;
+    border-radius: 16px;
+}
+
 .card__name {
     position: absolute;
     top: 10px;
@@ -176,6 +182,7 @@ body {
 
 .main__weather img {
     max-width: 100%;
+    border-radius: 16px;
 }
 
 .weather__element {
@@ -258,6 +265,12 @@ body {
     display: block;
     width: 288px;
     font-size: 16px;
+}
+
+.tour img {
+    width: 288px;
+    height: 207px;
+    border-radius: 16px;
 }
 
 .tour__title {
@@ -399,6 +412,11 @@ body {
 .school__title span {
     padding-left: 6px;
 } 
+
+.school__title img {
+    width: 31px;
+    height: 29px;
+}
 
 .school_text {
     font-size: 20px;
