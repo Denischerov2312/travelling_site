@@ -66,8 +66,6 @@ def render_answer(weather, town):
 @bot.message_handler()
 def reply(message):
     if message.text.lower() in lowercase_list(TOWNS):
-        with open('town_status.txt', 'w', encoding='utf-8') as file:
-            file.write(message.text)
         weather = get_weather(message.text)
         answer = render_answer(weather, message.text)
         filepath = join(TOWN_IMAGES_FOLDER, f'{message.text}.jpg')
