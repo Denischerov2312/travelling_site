@@ -16,17 +16,19 @@ def parse_excursions(response, city):
     excursions = []
 
     for card in cards:
+        num = card.find(class_='exp-header')['href']
+        excursion_url = f'https://experience.tripster.ru{num}'
         title_text = card.find(class_='title').text.strip()
         description = card.find(class_='tagline').text.strip()
         duration = card.find(class_='duration')
         movement = card.find(class_='movement').text.strip()
         datetime = card.find(class_='dates')
         payment = card.find(class_='price-actual').text.strip()
-        quantity = card.find(class_='price-for').text.strip()
+        quantity = find_quantity(card)
+        tour_type = find_tour_type(card)
         img_url = card.find('img', class_='exp-pic lazy-image')['src']
         img_name = card.find('img', class_='exp-pic lazy-image')['alt']
         img_name = sanitize_filename(img_name.split('"')[1])
-        print(img_name)
         img_path = download_image(img_url, f'{img_name}.jpeg', f'excursions_images/{city}')
         if duration:
             time = duration.text.strip()
@@ -38,6 +40,7 @@ def parse_excursions(response, city):
             date = 'Ежедневно'
 
         excursions.append({
+            'excursion_url': excursion_url,
             'city_name': city_name,
             'title_text': title_text,
             'description': description,
@@ -46,10 +49,29 @@ def parse_excursions(response, city):
             'datetime': date,
             'payment': payment,
             'quantity': quantity,
+            'tour_type': tour_type,
             'image_url': img_url,
             'img_path': img_path
         })
     return excursions
+
+
+def find_tour_type(soup):
+    tour_type = soup.find(class_='price-for').text.strip()
+    if tour_type.lower() == 'за одного':
+        return tour_type.strip()
+    else:
+        tour_type = tour_type.split(',')
+        return tour_type[0].strip()
+
+
+def find_quantity(soup):
+    quantity = soup.find(class_='price-for').text.strip()
+    if quantity.lower() == 'за одного':
+        return 'Индивидуальная'
+    else:
+        quantity = quantity.split(',')
+        return quantity[1].strip()
 
 
 def download_image(url, filename, folder):
@@ -102,9 +124,9 @@ def main():
                 payload = {'page': page_num}
                 page_response = requests.get(url, params=payload)
                 page_response.raise_for_status()
-                all_activities.append(parse_excursions(page_response, city))
+                [all_activities.append(excursion) for excursion in parse_excursions(page_response, city)]
         else:
-            all_activities.append(parse_excursions(city_response, city))
+            [all_activities.append(excursion) for excursion in parse_excursions(city_response, city)]
 
         with open(f'cities/{city}.json', 'w', encoding='utf8') as outfile:
             json.dump(all_activities, outfile, ensure_ascii=False,)
