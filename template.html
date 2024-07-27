@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/styles/main.css" />
+  <link rel="stylesheet" href="../assets/styles/main.css" />
   <title>Traveling</title>
 </head>
 
@@ -22,28 +22,13 @@
     <div class="header__popular-gids">
       <div class="popular-gids__title">Популярные экскурсии</div>
       <div class="popular-gids">
-        <a class="card" href="#">
-          <img src="assets/images/дивеевоарзм.png">
-          <div class="card__name">Дивеево и Арзамас</div>
-          <img class='arrow' src="assets/images/Arrow.png" alt="Стрелка">
-        </a>
-        
-        <a class="card" href="#">
-
-          <img src="assets/images/вечернвятрехч.png">
-          <div class="card__name">Вечерняя обзорная трёхчасовая автобусная</div>
-          <img class="arrow" src="assets/images/Arrow.png" alt="Стрелка">
-
-        </a>
-
-        <a class="card" href="#">
-
-          <img src="assets/images/болдино.png">
-          <div class="card__name">Большое Болдино</div>
-          <img class="arrow" src="assets/images/Arrow.png" alt="Стрелка">
-
-        </a>
-
+        {% for i in range(0,3) %}
+          <a class="card" href="#">
+            <img class="card__background" src="../{{excursions[i].img_path}}">
+            <div class="card__name">{{excursions[i].title_text}}</div>
+            <img class='arrow' src="../assets/images/Arrow.png" alt="Стрелка">
+          </a>
+        {% endfor %}
       </div>
     </div>
 
@@ -51,32 +36,30 @@
 
   <main class="main">
     <div class="container">
-
       <div class="main__menu-row">
-
         <div class="main__weather">
-          <img src="assets/images/back_weather.png" alt="Картинка погоды">
+          <img src="../assets/images/back_weather.png" alt="Картинка погоды">
           <div class="weather__title weather__element">
-            <img src="assets/images/sun.svg">
+            <img src="../assets/images/sun.svg">
             Погода на сегодня
           </div>
-          <div class="weather__town weather__element">Нижний Новгород</div>
+          <div class="weather__town weather__element">{{weather.city}}</div>
           <div class="weather__time weather__element">Сейчас
             <span id="clock"></span>
             </div>
           <div class="weather__condition weather__element">
-            <img src="assets/images/cloud.png">
-            Пасмурно
+            <img src="../assets/images/cloud.png">
+            {{weather.condition}}
           </div>
           <div class="weather__humidity weather__element">
-            <img src="assets/images/влажность.png">
-            81%
+            <img src="../assets/images/влажность.png">
+            {{weather.humidity}}%
           </div>
           <div class="weather__wind-speed weather__element">
-            <img src="assets/images/wind.png">
-            1.8 м/c, СЗ
+            <img src="../assets/images/wind.png">
+            {{weather.wind_speed}} м/c, {{weather.wind_dir}}
           </div>
-          <div class="weather__temp weather__element">+21°</div>
+          <div class="weather__temp weather__element">+{{weather.temp}}°</div>
         </div>
 
         <div class="main__description">
@@ -84,686 +67,49 @@
           Здесь вы найдёте всё необходимое для планирования идеального путешествия, 
           от актуальных погодных условий до подробных гидов по интересным местам.
         </div>
-
       </div>
 
-      <div class="city__title">Нижний Новгород</div>
+      <div class="city__title">{{weather.city}}</div>
 
       <div class="main__tours">
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
-            </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
+        {% for excursion in excursions %}
+          <div class="tour">
+            <img src="../{{excursion.img_path}}">
+            <div class="tour__title">{{excursion.title_text}}</div>
+            <div class="tour__text">
+              {{excursion.description}}
             </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
 
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
+            <div class="tour__metods-movements">
+              <div class="transport">
+                {{excursion.movement}}
+              </div>
+              <div class="tour__count-people">
+                #
+              </div>
+              <div class="tour__time">
+                {{excursion.duration}}
+              </div>
             </div>
-            <div class="tour__count-people">
-              18 человек
+            
+            <div class="tour__data tour_element">
+              {{excursion.datetime}}
             </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
 
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
+            <div class="tour__price tour_element">
+              {{excursion.payment}}
             </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
 
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
-          </div>
-        </div>
-
-        <div class="tour">
-          <img src="assets/images/tour1.png">
-          <div class="tour__title">Восемь веков Нижнего</div>
-          <div class="tour__text">
-            Прекрасная возможность увидеть весь Нижний 
-            Новгород и узнать его историю за 3 часа на прогулке 
-            с членом Нижегородской гильдии экскурсоводов.
-          </div>
-
-          <div class="tour__metods-movements">
-            <div class="transport">
-              На автомобиле
-            </div>
-            <div class="tour__type">
-              Индивидуальная
+            <div class="tour__price-type tour_element">
+              #
             </div>
-            <div class="tour__count-people">
-              18 человек
-            </div>
-            <div class="tour__time">
-              до 3ч.
-            </div>
-          </div>
-          
-          <div class="tour__data tour_element">
-            Сб, 20 июл, 07:30
-          </div>
-
-          <div class="tour__price tour_element">
-            7 900 ₽
-          </div>
-
-          <div class="tour__price-type tour_element">
-            за экскурсию
           </div>
-        </div>
-
+        {% endfor %}
       </div>
       
-
       <div class="button-wrapper">
         <button class="button__show-more">Показать ещё</button>
       </div>
-
     </div>
   </main>
 
@@ -782,21 +128,21 @@
               Контакты
             </div>
             <div class="contact__mail contact__element">
-              <img src="assets/images/gmail_icon.png" alt="Лого почты">
+              <img src="../assets/images/gmail_icon.png" alt="Лого почты">
               excursion@gmail.com
             </div>
             <div class="contact__tg contact__element">
-              <img src="assets/images/tg_icon.png" alt="Лого телеграмма">
+              <img src="../assets/images/tg_icon.png" alt="Лого телеграмма">
               @Travelt123_bot
             </div>
             <div class="contact__github contact__element">
-              <img src="assets/images/git_icon.png" alt="Лого github">
-              github.com/Denischerov2312/travelling_site
+              <img src="../assets/images/git_icon.png" alt="Лого github">
+              <a href="https://github.com/Denischerov2312/travelling_site">github.com/Denischerov2312/travelling_site</a>
             </div>
           </div>
           <div class="contact__card">
             <div class="school__title">
-              <img src="assets/images/3st_place_icon.png" alt="Лого школы">
+              <img src="../assets/images/3st_place_icon.png" alt="Лого школы">
               <span>Третье место</span>
             </div>
             <div class="school_text">
@@ -805,7 +151,7 @@
           </div>
           <div class="contact__card">
             <div class="site__title">
-              <img src="assets/images/sourse_site_icon.png" alt="Логотип сайта-источника">
+              <img src="../assets/images/sourse_site_icon.png" alt="Логотип сайта-источника">
             </div>
             <div class="site__text">
               Вся информация об экскурсиях и ценах взята с сайта 
@@ -816,8 +162,8 @@
       </div> 
     </div>
   </footer>
-  <script src="scripts/show_more.js"></script>
-  <script src="scripts/real_time.js"></script>
+  <script src="../scripts/show_more.js"></script>
+  <script src="../scripts/real_time.js"></script>
 </body>
 
 </html>
