@@ -1,5 +1,6 @@
 import os
 import json
+import time
 from pathlib import Path
 from os.path import join
 
@@ -116,27 +117,31 @@ def main():
         url = f'https://experience.tripster.ru/experience/{city}'
         all_activities = []
 
-        city_response = requests.get(url)
-        city_response.raise_for_status()
-        check_for_redirect(city_response)
-        city_soup = BeautifulSoup(city_response.text, "html.parser")
+        try:
+            city_response = requests.get(url)
+            city_response.raise_for_status()
+            check_for_redirect(city_response)
+            city_soup = BeautifulSoup(city_response.text, "html.parser")
 
-        pagination = city_soup.find(class_='pagination')
-        if pagination:
-            page_count = pagination.find_all('a')
-            page_count = int(page_count[-1].text)
+            pagination = city_soup.find(class_='pagination')
+            if pagination:
+                page_count = pagination.find_all('a')
+                page_count = int(page_count[-1].text)
 
-            for page_num in range(1, page_count+1):
-                payload = {'page': page_num}
-                page_response = requests.get(url, params=payload)
-                page_response.raise_for_status()
-                check_for_redirect(page_response)
-                [all_activities.append(excursion) for excursion in parse_excursions(page_response, city)]
-        else:
-            [all_activities.append(excursion) for excursion in parse_excursions(city_response, city)]
+                for page_num in range(1, page_count+1):
+                    payload = {'page': page_num}
+                    page_response = requests.get(url, params=payload)
+                    page_response.raise_for_status()
+                    check_for_redirect(page_response)
+                    [all_activities.append(excursion) for excursion in parse_excursions(page_response, city)]
+            else:
+                [all_activities.append(excursion) for excursion in parse_excursions(city_response, city)]
 
-        with open(f'cities/{city}.json', 'w', encoding='utf8') as outfile:
-            json.dump(all_activities, outfile, ensure_ascii=False,)
+            with open(f'cities/{city}.json', 'w', encoding='utf8') as outfile:
+                json.dump(all_activities, outfile, ensure_ascii=False,)
+        except requests.exceptions.ConnectionError:
+            print("Соединение с сайтом прервано.")
+            time.sleep(20)
 
 
 if __name__ == '__main__':
