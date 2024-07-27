@@ -251,15 +251,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 59px;
-    margin-bottom: auto;
-}
-
-.button__show-more {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-
+    margin-bottom: 40px;
 }
 
 .tour {
@@ -291,7 +283,39 @@ body {
     margin-top: 16px;
 }
 
+.tour:nth-child(n + 11) {
+    display: none;
+}
 
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.button__show-more {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 13px;
+    color: #828282;
+    border-radius: 10px;
+    border: 2px solid #F96A3D;
+    margin-bottom: 40px;
+    width: 200px;
+    transition: all 0.5s ease;
+}
+
+.button__show-more:hover {
+    transform: scale(1.05);
+    filter: brightness(90%);
+}
+
+.button__show-more:active {
+    filter: brightness(80%);
+}
+
+.tour.is-visible {
+    display: block;
+}
 
 /* Подвал сайта */
 
