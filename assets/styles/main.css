@@ -60,6 +60,9 @@ body {
     top: 120px;
 }
 
+.header__title span {
+    display: block;
+}
 
 .popular-gids__title {
     position: relative;
