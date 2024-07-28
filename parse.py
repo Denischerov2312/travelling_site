@@ -75,11 +75,6 @@ def find_quantity(soup):
         return quantity[1].strip()
 
 
-def check_for_redirect(response):
-    if response.history:
-        raise requests.exceptions.HTTPError
-
-
 def download_image(url, filename, folder):
     try:
         image_response = requests.get(url)
@@ -120,7 +115,6 @@ def main():
         try:
             city_response = requests.get(url)
             city_response.raise_for_status()
-            check_for_redirect(city_response)
             city_soup = BeautifulSoup(city_response.text, "html.parser")
 
             pagination = city_soup.find(class_='pagination')
@@ -132,7 +126,6 @@ def main():
                     payload = {'page': page_num}
                     page_response = requests.get(url, params=payload)
                     page_response.raise_for_status()
-                    check_for_redirect(page_response)
                     [all_activities.append(excursion) for excursion in parse_excursions(page_response, city)]
             else:
                 [all_activities.append(excursion) for excursion in parse_excursions(city_response, city)]
