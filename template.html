@@ -23,7 +23,7 @@
       <div class="popular-gids__title">Популярные экскурсии</div>
       <div class="popular-gids">
         {% for i in range(0,3) %}
-          <a class="card" href="#">
+          <a class="card" href="{{excursions[i].excursion_url}}">
             <img class="card__background" src="../{{excursions[i].img_path}}">
             <div class="card__name">{{excursions[i].title_text}}</div>
             <img class='arrow' src="../assets/images/Arrow.png" alt="Стрелка">
@@ -73,7 +73,7 @@
 
       <div class="main__tours">
         {% for excursion in excursions %}
-          <div class="tour">
+          <a class="tour" href="{{excursion.excursion_url}}">
             <img src="../{{excursion.img_path}}">
             <div class="tour__title">{{excursion.title_text}}</div>
             <div class="tour__text">
@@ -85,7 +85,7 @@
                 {{excursion.movement}}
               </div>
               <div class="tour__count-people">
-                #
+                {{excursion.quantity}}
               </div>
               <div class="tour__time">
                 {{excursion.duration}}
@@ -101,9 +101,9 @@
             </div>
 
             <div class="tour__price-type tour_element">
-              #
+              {{excursion.tour_type}}
             </div>
-          </div>
+          </a>
         {% endfor %}
       </div>
       
