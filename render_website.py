@@ -66,6 +66,7 @@ def main():
 
     server = Server()
     server.watch('template.html', on_reload)
+    server.watch('weather/weather.json', on_reload)
     server.serve(root='.',  default_filename='pages/index.html')
 
 
