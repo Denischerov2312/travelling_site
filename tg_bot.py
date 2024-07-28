@@ -2,6 +2,7 @@ from os.path import join
 from os import getenv
 
 import telebot
+import requests
 from more_itertools import chunked
 from telebot.types import KeyboardButton
 from telebot.types import ReplyKeyboardMarkup
@@ -56,16 +57,25 @@ def lowercase_list(data):
     return (list(data))
 
 
-def render_answer(weather, town):
+def is_site_hosting(url):
     try:
-        answer = f"""*{town}*
+        response = requests.get(url)
+        if response.status_code == 200:
+            return True
+    except requests.exceptions.ConnectionError:
+        return False
+
+
+def render_answer(weather, town):
+    answer = f"""*{town}*
 Температура🌡️ {weather['temp']}°, {weather['condition']}
 Влажность💧{weather['humidity']}%
 Скорость ветра💨 {weather['wind_speed']} км/ч, направление: {weather['wind_dir']}
-[Узнайте подробнее про {town}.]({HOST_URL})
-        """
-    except Exception:
-        return 'Непрвильно указан город'
+"""
+    if is_site_hosting(HOST_URL):
+        answer += f'[Узнайте подробнее про {town}.]({HOST_URL})'
+    else:
+        answer += 'Веб-сайт не запущен.'
     return answer
 
 
