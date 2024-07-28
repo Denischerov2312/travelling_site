@@ -1,9 +1,10 @@
+from os.path import join
+from os import getenv
+
 import telebot
 from more_itertools import chunked
 from telebot.types import KeyboardButton
 from telebot.types import ReplyKeyboardMarkup
-from os.path import join
-from os import getenv
 from dotenv import load_dotenv
 
 from weather import get_weather
