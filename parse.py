@@ -80,7 +80,7 @@ def download_image(url, filename, folder):
         image_response = requests.get(url)
         image_response.raise_for_status()
         os.makedirs(folder, exist_ok=True)
-        filepath = join(folder, filename)
+        filepath = join(folder, filename).replace('\\', '/')
         with open(filepath, 'wb') as file:
             file.write(image_response.content)
         return filepath
